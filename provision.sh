@@ -40,6 +40,11 @@ eksctl create fargateprofile --cluster $EKSCLUSTERNAME --name fp-emr --namespace
 eksctl create iamidentitymapping --cluster $EKSCLUSTERNAME --namespace "emr" --service-name "emr-containers"
 eksctl utils update-cluster-logging --cluster $EKSCLUSTERNAME --enable-types all --approve
 
+# create S3 bucket for output
+export ACCOUNTID=$(aws sts get-caller-identity --query Account --output text)
+export OUTPUTS3BUCKET=${EMRCLUSTERNAME}-${ACCOUNTID}
+aws s3api create-bucket --bucket $OUTPUTS3BUCKET
+
 # Create a job execution role (https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/creating-job-execution-role.html)
 cat > /tmp/job-execution-policy.json <<EOL
 {
@@ -47,8 +52,13 @@ cat > /tmp/job-execution-policy.json <<EOL
     "Statement": [ 
         {
             "Effect": "Allow",
-            "Action": [ "s3:PutObject", "s3:GetObject", "s3:ListBucket" ],
-            "Resource": "*"
+            "Action": [
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": ["arn:aws:s3:::${OUTPUTS3BUCKET}","arn:aws:s3:::${OUTPUTS3BUCKET}/*"]
         }, 
         {
             "Effect": "Allow",

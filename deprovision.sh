@@ -13,6 +13,10 @@ export ROLEARN=arn:aws:iam::$ACCOUNTID:role/$ROLENAME
 export OUTPUTS3BUCKET=${EMRCLUSTERNAME}-${ACCOUNTID}
 export POLICYARN=arn:aws:iam::$ACCOUNTID:policy/${ROLENAME}-policy
 
+# install eksctl (https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/setting-up-eksctl.html)
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+
 # update aws CLI to the latest version (we will require aws cli version >= 2.1.14)
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip" 
 unzip -q -o /tmp/awscliv2.zip -d /tmp

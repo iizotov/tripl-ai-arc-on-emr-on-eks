@@ -23,9 +23,6 @@ curl -L "https://storage.googleapis.com/kubernetes-release/release/$(curl -s htt
 chmod +x /tmp/kubectl
 sudo mv /tmp/kubectl /usr/local/bin
 
-# create S3 bucket for output
-aws s3api create-bucket --bucket $OUTPUTS3BUCKET
-
 # sumbit job
 
 aws emr-containers start-job-run --virtual-cluster-id $EMRCLUSTERID \
