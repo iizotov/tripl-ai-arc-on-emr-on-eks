@@ -58,7 +58,7 @@ cat > /tmp/job-execution-policy.json <<EOL
                 "s3:GetObject",
                 "s3:ListBucket"
             ],
-            "Resource": ["arn:aws:s3:::${OUTPUTS3BUCKET}","arn:aws:s3:::${OUTPUTS3BUCKET}/*"]
+            "Resource": ["arn:aws:s3:::${OUTPUTS3BUCKET}","arn:aws:s3:::${OUTPUTS3BUCKET}/*", "arn:aws:s3:::nyc-tlc","arn:aws:s3:::nyc-tlc/*"]
         }, 
         {
             "Effect": "Allow",
