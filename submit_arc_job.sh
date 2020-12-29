@@ -33,4 +33,6 @@ aws emr-containers start-job-run --virtual-cluster-id $EMRCLUSTERID \
     --job-driver '{"sparkSubmitJobDriver": {"entryPoint": "https://raw.githubusercontent.com/iizotov/tripl-ai-arc-on-emr-on-eks/main/arc_2.12-3.6.2.jar", "entryPointArguments":["--etl.config.uri=https://raw.githubusercontent.com/iizotov/tripl-ai-arc-on-emr-on-eks/main/green_taxi_load.ipynb"], "sparkSubmitParameters": "--packages com.typesafe:config:1.4.0 --class ai.tripl.arc.ARC --conf spark.executor.instances=10 --conf spark.executor.memory=4G --conf spark.driver.memory=2G --conf spark.executor.cores=2 --conf spark.kubernetes.driverEnv.ETL_CONF_ENV=production --conf spark.kubernetes.driverEnv.OUTPUT=s3://'$OUTPUTS3BUCKET'/output/ --conf spark.kubernetes.driverEnv.SCHEMA=https://raw.githubusercontent.com/iizotov/tripl-ai-arc-on-emr-on-eks/main/green_taxi_schema.json"}}' \
     --configuration-overrides '{"monitoringConfiguration": {"cloudWatchMonitoringConfiguration": {"logGroupName": "/aws/eks/'$EKSCLUSTERNAME'/jobs", "logStreamNamePrefix": "arc-job"}}}'
 
-echo "Job submitted, navigate to the output S3 bucket here https://s3.console.aws.amazon.com/s3/buckets/${OUTPUTS3BUCKET} to view outputs"
+echo "Job submitted:
+echo "Navigate to https://console.aws.amazon.com/elasticmapreduce/home?region=us-east-1#virtual-cluster-jobs:${EMRCLUSTERID} to view job status"
+echo "Navigate to the output S3 bucket here https://s3.console.aws.amazon.com/s3/buckets/${OUTPUTS3BUCKET} to view outputs"
