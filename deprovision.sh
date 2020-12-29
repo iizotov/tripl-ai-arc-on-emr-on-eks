@@ -7,7 +7,7 @@ export EMRCLUSTERNAME=emr-on-$EKSCLUSTERNAME
 export ROLENAME=${EMRCLUSTERNAME}-execution-role
 
 #submit test job
-export EMRCLUSTERID=$(aws emr-containers list-virtual-clusters --query "virtualClusters[?name == 'emr-on-eks-ec2' && state == 'RUNNING'].id" --output text)
+export EMRCLUSTERID=$(aws emr-containers list-virtual-clusters --query "virtualClusters[?name == '${EMRCLUSTERNAME}' && state == 'RUNNING'].id" --output text)
 export ACCOUNTID=$(aws sts get-caller-identity --query Account --output text)
 export ROLEARN=arn:aws:iam::$ACCOUNTID:role/$ROLENAME
 export OUTPUTS3BUCKET=${EMRCLUSTERNAME}-${ACCOUNTID}
