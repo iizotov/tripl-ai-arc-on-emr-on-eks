@@ -32,6 +32,9 @@ aws eks update-kubeconfig --name $EKSCLUSTERNAME
 # Create kubernetes namespace 'emr' for EMR
 kubectl create namespace emr
 
+# Create fargate profile 'fp-emr' for namespace 'emr'
+eksctl create fargateprofile --cluster $EKSCLUSTERNAME --name fp-emr --namespace emr
+
 # Wait for EKS cluster to finish provisioning, enable all logging
 # Enable cluster access for Amazon EMR on EKS (https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/setting-up-cluster-access.html) in the 'emr' kubernetes namespace by running:
 eksctl create iamidentitymapping --cluster $EKSCLUSTERNAME --namespace "emr" --service-name "emr-containers"
