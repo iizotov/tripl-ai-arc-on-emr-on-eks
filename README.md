@@ -11,7 +11,7 @@ AWS Launched [EMR on EKS](https://aws.amazon.com/emr/features/eks/) and this sam
     ```bash
     curl https://raw.githubusercontent.com/iizotov/tripl-ai-arc-on-emr-on-eks/main/submit_arc_job.sh | bash
     ```
-    The sample job will create an output S3 bucket, load the [TLC green taxi trip records](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) from public `s3://nyc-tlc/trip*data/green_tripdata*.csv`, apply schema, convert it into Delta format and store it in the output S3 bucket.
+    The sample job will create an output S3 bucket, load the [TLC green taxi trip records](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) from public `s3://nyc-tlc/trip*data/green_tripdata*.csv`, apply schema, convert it into Parquet and store it in the output S3 bucket.
 
     The job is defined as a [jupyter notebook green_taxi_load.ipynb](green_taxi_load.ipynb) using [Arc Framework](https://arc.tripl.ai/getting-started/) and the applied schema is defined in [green_taxi_schema.json](green_taxi_schema.json)
 
