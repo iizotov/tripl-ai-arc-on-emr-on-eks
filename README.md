@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 Amazon.com, Inc. or its affiliates.
+
+SPDX-License-Identifier: MIT-0
+-->
+
 # Arc ETL framework on EMR on EKS
 AWS Launched [EMR on EKS](https://aws.amazon.com/emr/features/eks/) and this sample demonstrates an end-to-end process to provision an EKS cluster, execute a Spark ETL job defined as a [jupyter notebook](green_taxi_load.ipynb) using [Arc Framework](https://arc.tripl.ai/getting-started/).
 
